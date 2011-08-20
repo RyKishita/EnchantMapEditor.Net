@@ -1,8 +1,8 @@
-�{�� https://github.com/wise9/enchantMapEditor �̊֘A
+本家 https://github.com/wise9/enchantMapEditor の関連
 
-����́AEnchantMapEditor ���N���C�A���g�\�t�g�Ƃ��č쐬�������̂ł��B
-����ɂ� .Net Framework 4 (Client Profile) ���K�v�ł��邽�߁A
-�C���X�g�[�����o���Ȃ����͖{�Ƃ��g�p���Ă��������B
+これは、EnchantMapEditor をクライアントソフトとして作成したものです。
+動作には .Net Framework 4 (Client Profile) が必要であるため、
+インストールが出来ない方は本家を使用してください。
 
-�܂��{�Ƃ̋@�\���ׂĂ�ԗ����Ă��܂���B
-���̋@�\���K�v�ȏꍇ�́A���l�ɖ{�Ƃ��g�p���Ă��������B
+また本家の機能すべてを網羅していません。
+その機能が必要な場合は、同様に本家を使用してください。
