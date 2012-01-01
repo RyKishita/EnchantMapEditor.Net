@@ -735,19 +735,66 @@ namespace EnchantMapEditor
 			}
 		}
 
+		class PutPair : IEquatable<PutPair>
+		{
+			public int row;
+			public int column;
+			public bool valid = true;
+
+			public bool Equals(PutPair other)
+			{
+				return row == other.row && column == other.column;
+			}
+		}
+
 		private void PutFill<T>(List<List<T>> idMap, int rowIndex, int columnIndex, T srcID, T dstID) where T : struct
 		{
-			if (rowIndex < 0 || idMap.Count <= rowIndex) return;
-			var row = idMap[rowIndex];
-			if (columnIndex < 0 || row.Count <= columnIndex) return;
-			if (!row[columnIndex].Equals(srcID)) return;
+			Cursor = Cursors.WaitCursor;
+			try
+			{
+				var putPairs = new List<PutPair>();
+				Action<int, int> addPutPair = (r, c) =>
+				{
+					var p = new PutPair() { row = r, column = c };
+					if (!putPairs.Contains(p)) putPairs.Add(p);
+				};
 
-			row[columnIndex] = dstID;
+				addPutPair(rowIndex, columnIndex);
 
-			PutFill(idMap, rowIndex - 1, columnIndex, srcID, dstID);//再帰
-			PutFill(idMap, rowIndex + 1, columnIndex, srcID, dstID);//再帰
-			PutFill(idMap, rowIndex, columnIndex - 1, srcID, dstID);//再帰
-			PutFill(idMap, rowIndex, columnIndex + 1, srcID, dstID);//再帰
+				while (true)
+				{
+					var putPair = putPairs.FirstOrDefault(p => p.valid);
+					if (putPair == null) break;
+
+					var rows = idMap[putPair.row];
+					if (rows[putPair.column].Equals(srcID))
+					{
+						rows[putPair.column] = dstID;
+
+						if (0 < putPair.row)
+						{
+							addPutPair(putPair.row - 1, putPair.column);
+						}
+						if (putPair.row + 1 < idMap.Count)
+						{
+							addPutPair(putPair.row + 1, putPair.column);
+						}
+						if (0 < putPair.column)
+						{
+							addPutPair(putPair.row, putPair.column - 1);
+						}
+						if (putPair.column + 1 < idMap[putPair.row].Count)
+						{
+							addPutPair(putPair.row, putPair.column + 1);
+						}
+					}
+					putPair.valid = false;
+				}
+			}
+			finally
+			{
+				Cursor = Cursors.Default;
+			}
 		}
 
 		private void PushEditData()
