@@ -333,7 +333,7 @@ namespace EnchantMapEditor
 
 		private void mapControlCanvas_SelectedItem(object sender, MapEventArgs e)
 		{
-			if (radioButtonModePutParts.Checked)
+			if (tabControlMode.SelectedTab == tabPagePutParts)
 			{
 				#region パーツ配置
 
@@ -371,7 +371,7 @@ namespace EnchantMapEditor
 
 				#endregion
 			}
-			else if (radioButtonModeCollision.Checked)
+			else if (tabControlMode.SelectedTab == tabPageCollision)
 			{
 				#region 衝突判定配置
 
@@ -391,7 +391,6 @@ namespace EnchantMapEditor
 					}
 				}
 
-				mapControlCanvas.ClearMask();
 				SetCollisionMask();
 				mapControlCanvas.UpdateImage();
 
@@ -434,7 +433,6 @@ namespace EnchantMapEditor
 		{
 			mapControlCanvas.Zoom = comboBoxZoomCanvas.SelectedIndex + 1;
 
-			mapControlCanvas.ClearMask();
 			SetCollisionMask();
 
 			checkedListBoxLayer.Items.Cast<LayerItem>()
@@ -454,18 +452,6 @@ namespace EnchantMapEditor
 			}
 		}
 
-		private void radioButtonModePutParts_CheckedChanged(object sender, EventArgs e)
-		{
-			mapControlCanvas.ClearMask();
-			if (radioButtonModeCollision.Checked)
-			{
-				SetCollisionMask();
-			}
-			mapControlCanvas.UpdateImage();
-
-			buttonReadCollision.Enabled = radioButtonModeCollision.Checked;
-		}
-
 		private void buttonReadCollision_Click(object sender, EventArgs e)
 		{
 			var idMap = ReadIDMap(false);
@@ -475,7 +461,6 @@ namespace EnchantMapEditor
 			collisionMap.AddRange(idMap.Select(row => row.Select(id => id == 1).ToList()));
 			SetupCollisionMap(false);
 
-			mapControlCanvas.ClearMask();
 			SetCollisionMask();
 			MakeCanvas();
 
@@ -500,14 +485,18 @@ namespace EnchantMapEditor
 
 		private void SetCollisionMask()
 		{
-			for (int rowIndex = 0; rowIndex < collisionMap.Count; rowIndex++)
+			mapControlCanvas.ClearMask();
+			if (tabControlMode.SelectedTab == tabPageCollision)
 			{
-				var row = collisionMap[rowIndex];
-				for (int columnIndex = 0; columnIndex < row.Count; columnIndex++)
+				for (int rowIndex = 0; rowIndex < collisionMap.Count; rowIndex++)
 				{
-					if (collisionMap[rowIndex][columnIndex])
+					var row = collisionMap[rowIndex];
+					for (int columnIndex = 0; columnIndex < row.Count; columnIndex++)
 					{
-						mapControlCanvas.SetMask(rowIndex, columnIndex);
+						if (collisionMap[rowIndex][columnIndex])
+						{
+							mapControlCanvas.SetMask(rowIndex, columnIndex);
+						}
 					}
 				}
 			}
@@ -583,7 +572,7 @@ namespace EnchantMapEditor
 				for (int rowIndex = 0; rowIndex < partsData.Data.IDMap.Count; rowIndex++)
 				{
 					var row = partsData.Data.IDMap[rowIndex];
-					for(int columnIndex = 0; columnIndex < row.Count; columnIndex++)
+					for (int columnIndex = 0; columnIndex < row.Count; columnIndex++)
 					{
 						if (row[columnIndex] == SelectedPartsID)
 						{
@@ -724,7 +713,7 @@ namespace EnchantMapEditor
 						return false;
 					}
 				};
-				if (form.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+				if (form.ShowDialog(this) == DialogResult.OK)
 				{
 					return worker.LayerParts;
 				}
@@ -867,11 +856,7 @@ namespace EnchantMapEditor
 				numericUpDownMapRowCount.Value = MapRowCount;
 				numericUpDownMapColumnCount.Value = MapColumnCount;
 
-				mapControlCanvas.ClearMask();
-				if (radioButtonModeCollision.Checked)
-				{
-					SetCollisionMask();
-				}
+				SetCollisionMask();
 				MakeCanvas();
 
 				UpdateUndoRedoButton();
@@ -894,6 +879,45 @@ namespace EnchantMapEditor
 			mapControlParts.PartsWidth = Convert.ToInt32(numericUpDownPartsWidth.Value);
 			mapControlCanvas.PartsHeight =
 			mapControlParts.PartsHeight = Convert.ToInt32(numericUpDownPartsHeight.Value);
+		}
+
+		private void tabControlMode_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			SetCollisionMask();
+			mapControlCanvas.UpdateImage();
+		}
+
+		private void buttonSetCollisionByPartKind_Click(object sender, EventArgs e)
+		{
+			using (var form = new SetCollisionByMapKindForm())
+			{
+				form.Parts = partsImages;
+				if (form.ShowDialog(this) == DialogResult.OK)
+				{
+					foreach (LayerItem layerItem in checkedListBoxLayer.Items)
+					{
+						for (int row = 0; row < MapRowCount; row++)
+						{
+							var rowCollisions = collisionMap[row];
+							var rowIDs = layerItem.Data.IDMap[row];
+							for (int column = 0; column < MapColumnCount; column++)
+							{
+								int id = rowIDs[column];
+								if (id < 0) continue;//透明部分
+
+								switch (form.Results[id])
+								{
+									case CheckState.Checked: rowCollisions[column] = true; break;
+									case CheckState.Unchecked: rowCollisions[column] = false; break;
+								}
+							}
+						}
+					}
+
+					SetCollisionMask();
+					mapControlCanvas.UpdateImage();
+				}
+			}
 		}
 	}
 }

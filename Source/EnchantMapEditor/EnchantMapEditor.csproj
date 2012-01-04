@@ -55,6 +55,12 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SetCollisionByMapKindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SetCollisionByMapKindForm.Designer.cs">
+      <DependentUpon>SetCollisionByMapKindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SetCollisionByMapKindForm.resx">
+      <DependentUpon>SetCollisionByMapKindForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>

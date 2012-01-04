@@ -48,11 +48,8 @@
 			this.buttonChangeBackground = new System.Windows.Forms.Button();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label10 = new System.Windows.Forms.Label();
-			this.groupBox2 = new System.Windows.Forms.GroupBox();
 			this.checkBoxPutFill = new System.Windows.Forms.CheckBox();
 			this.buttonReadCollision = new System.Windows.Forms.Button();
-			this.radioButtonModeCollision = new System.Windows.Forms.RadioButton();
-			this.radioButtonModePutParts = new System.Windows.Forms.RadioButton();
 			this.comboBoxZoomParts = new System.Windows.Forms.ComboBox();
 			this.mapControlParts = new EnchantMapEditor.MapControl();
 			this.buttonPutClear = new System.Windows.Forms.Button();
@@ -64,6 +61,10 @@
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.mapControlCanvas = new EnchantMapEditor.MapControl();
+			this.tabControlMode = new System.Windows.Forms.TabControl();
+			this.tabPagePutParts = new System.Windows.Forms.TabPage();
+			this.tabPageCollision = new System.Windows.Forms.TabPage();
+			this.buttonSetCollisionByPartKind = new System.Windows.Forms.Button();
 			this.buttonHelp = new System.Windows.Forms.Button();
 			this.buttonUnDo = new System.Windows.Forms.Button();
 			this.buttonReDo = new System.Windows.Forms.Button();
@@ -72,7 +73,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMapRowCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsHeight)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsWidth)).BeginInit();
-			this.groupBox2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedParts)).BeginInit();
 			this.groupBox3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -80,6 +80,9 @@
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.groupBox1.SuspendLayout();
+			this.tabControlMode.SuspendLayout();
+			this.tabPagePutParts.SuspendLayout();
+			this.tabPageCollision.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonUpLayer
@@ -213,7 +216,7 @@
 			// buttonLoadParts
 			// 
 			this.buttonLoadParts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonLoadParts.Location = new System.Drawing.Point(509, 11);
+			this.buttonLoadParts.Location = new System.Drawing.Point(509, 12);
 			this.buttonLoadParts.Name = "buttonLoadParts";
 			this.buttonLoadParts.Size = new System.Drawing.Size(58, 23);
 			this.buttonLoadParts.TabIndex = 10;
@@ -254,7 +257,7 @@
             0,
             0,
             0});
-			this.numericUpDownPartsHeight.Location = new System.Drawing.Point(374, 13);
+			this.numericUpDownPartsHeight.Location = new System.Drawing.Point(374, 14);
 			this.numericUpDownPartsHeight.Maximum = new decimal(new int[] {
             256,
             0,
@@ -284,7 +287,7 @@
             0,
             0,
             0});
-			this.numericUpDownPartsWidth.Location = new System.Drawing.Point(453, 13);
+			this.numericUpDownPartsWidth.Location = new System.Drawing.Point(453, 14);
 			this.numericUpDownPartsWidth.Maximum = new decimal(new int[] {
             256,
             0,
@@ -326,7 +329,7 @@
 			// 
 			this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label2.AutoSize = true;
-			this.label2.Location = new System.Drawing.Point(430, 16);
+			this.label2.Location = new System.Drawing.Point(430, 17);
 			this.label2.Name = "label2";
 			this.label2.Size = new System.Drawing.Size(17, 12);
 			this.label2.TabIndex = 8;
@@ -336,35 +339,17 @@
 			// 
 			this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.label10.AutoSize = true;
-			this.label10.Location = new System.Drawing.Point(346, 16);
+			this.label10.Location = new System.Drawing.Point(346, 17);
 			this.label10.Name = "label10";
 			this.label10.Size = new System.Drawing.Size(25, 12);
 			this.label10.TabIndex = 6;
 			this.label10.Text = "高さ";
 			// 
-			// groupBox2
-			// 
-			this.groupBox2.Controls.Add(this.checkBoxPutFill);
-			this.groupBox2.Controls.Add(this.buttonReadCollision);
-			this.groupBox2.Controls.Add(this.radioButtonModeCollision);
-			this.groupBox2.Controls.Add(this.radioButtonModePutParts);
-			this.groupBox2.Controls.Add(this.comboBoxZoomParts);
-			this.groupBox2.Controls.Add(this.mapControlParts);
-			this.groupBox2.Controls.Add(this.buttonPutClear);
-			this.groupBox2.Controls.Add(this.pictureBoxSelectedParts);
-			this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.groupBox2.Location = new System.Drawing.Point(0, 110);
-			this.groupBox2.Name = "groupBox2";
-			this.groupBox2.Size = new System.Drawing.Size(263, 250);
-			this.groupBox2.TabIndex = 1;
-			this.groupBox2.TabStop = false;
-			this.groupBox2.Text = "配置";
-			// 
 			// checkBoxPutFill
 			// 
 			this.checkBoxPutFill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.checkBoxPutFill.AutoSize = true;
-			this.checkBoxPutFill.Location = new System.Drawing.Point(177, 133);
+			this.checkBoxPutFill.Location = new System.Drawing.Point(169, 121);
 			this.checkBoxPutFill.Name = "checkBoxPutFill";
 			this.checkBoxPutFill.Size = new System.Drawing.Size(72, 16);
 			this.checkBoxPutFill.TabIndex = 2;
@@ -375,45 +360,14 @@
 			// 
 			// buttonReadCollision
 			// 
-			this.buttonReadCollision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.buttonReadCollision.Enabled = false;
-			this.buttonReadCollision.Location = new System.Drawing.Point(146, 224);
+			this.buttonReadCollision.Location = new System.Drawing.Point(6, 6);
 			this.buttonReadCollision.Name = "buttonReadCollision";
-			this.buttonReadCollision.Size = new System.Drawing.Size(75, 23);
+			this.buttonReadCollision.Size = new System.Drawing.Size(125, 23);
 			this.buttonReadCollision.TabIndex = 6;
 			this.buttonReadCollision.Text = "取込";
-			this.toolTip1.SetToolTip(this.buttonReadCollision, "消灯判定データの取込");
+			this.toolTip1.SetToolTip(this.buttonReadCollision, "衝突判定データの取込");
 			this.buttonReadCollision.UseVisualStyleBackColor = true;
 			this.buttonReadCollision.Click += new System.EventHandler(this.buttonReadCollision_Click);
-			// 
-			// radioButtonModeCollision
-			// 
-			this.radioButtonModeCollision.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.radioButtonModeCollision.AutoSize = true;
-			this.radioButtonModeCollision.Location = new System.Drawing.Point(69, 227);
-			this.radioButtonModeCollision.Name = "radioButtonModeCollision";
-			this.radioButtonModeCollision.Size = new System.Drawing.Size(71, 16);
-			this.radioButtonModeCollision.TabIndex = 5;
-			this.radioButtonModeCollision.TabStop = true;
-			this.radioButtonModeCollision.Text = "衝突判定";
-			this.toolTip1.SetToolTip(this.radioButtonModeCollision, "衝突判定設定モード");
-			this.radioButtonModeCollision.UseVisualStyleBackColor = true;
-			this.radioButtonModeCollision.CheckedChanged += new System.EventHandler(this.radioButtonModePutParts_CheckedChanged);
-			// 
-			// radioButtonModePutParts
-			// 
-			this.radioButtonModePutParts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-			this.radioButtonModePutParts.AutoSize = true;
-			this.radioButtonModePutParts.Checked = true;
-			this.radioButtonModePutParts.Location = new System.Drawing.Point(6, 227);
-			this.radioButtonModePutParts.Name = "radioButtonModePutParts";
-			this.radioButtonModePutParts.Size = new System.Drawing.Size(52, 16);
-			this.radioButtonModePutParts.TabIndex = 4;
-			this.radioButtonModePutParts.TabStop = true;
-			this.radioButtonModePutParts.Text = "パーツ";
-			this.toolTip1.SetToolTip(this.radioButtonModePutParts, "マップパーツ配置モード");
-			this.radioButtonModePutParts.UseVisualStyleBackColor = true;
-			this.radioButtonModePutParts.CheckedChanged += new System.EventHandler(this.radioButtonModePutParts_CheckedChanged);
 			// 
 			// comboBoxZoomParts
 			// 
@@ -424,7 +378,7 @@
             "x1倍",
             "x2倍",
             "x3倍"});
-			this.comboBoxZoomParts.Location = new System.Drawing.Point(177, 155);
+			this.comboBoxZoomParts.Location = new System.Drawing.Point(169, 143);
 			this.comboBoxZoomParts.Name = "comboBoxZoomParts";
 			this.comboBoxZoomParts.Size = new System.Drawing.Size(80, 20);
 			this.comboBoxZoomParts.TabIndex = 3;
@@ -441,12 +395,12 @@
 			this.mapControlParts.BackColor = System.Drawing.Color.White;
 			this.mapControlParts.BorderWidth = 1;
 			this.mapControlParts.ColumnCount = 0;
-			this.mapControlParts.Location = new System.Drawing.Point(6, 18);
+			this.mapControlParts.Location = new System.Drawing.Point(6, 6);
 			this.mapControlParts.Name = "mapControlParts";
 			this.mapControlParts.PartsHeight = 0;
 			this.mapControlParts.PartsWidth = 0;
 			this.mapControlParts.RowCount = 0;
-			this.mapControlParts.Size = new System.Drawing.Size(165, 200);
+			this.mapControlParts.Size = new System.Drawing.Size(157, 212);
 			this.mapControlParts.TabIndex = 0;
 			this.mapControlParts.Zoom = 2;
 			this.mapControlParts.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlParts_SelectedItem);
@@ -454,7 +408,7 @@
 			// buttonPutClear
 			// 
 			this.buttonPutClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonPutClear.Location = new System.Drawing.Point(177, 104);
+			this.buttonPutClear.Location = new System.Drawing.Point(169, 92);
 			this.buttonPutClear.Name = "buttonPutClear";
 			this.buttonPutClear.Size = new System.Drawing.Size(80, 23);
 			this.buttonPutClear.TabIndex = 1;
@@ -466,7 +420,7 @@
 			// pictureBoxSelectedParts
 			// 
 			this.pictureBoxSelectedParts.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.pictureBoxSelectedParts.Location = new System.Drawing.Point(177, 18);
+			this.pictureBoxSelectedParts.Location = new System.Drawing.Point(169, 6);
 			this.pictureBoxSelectedParts.Name = "pictureBoxSelectedParts";
 			this.pictureBoxSelectedParts.Size = new System.Drawing.Size(80, 80);
 			this.pictureBoxSelectedParts.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -546,7 +500,7 @@
 			// 
 			// splitContainer1.Panel2
 			// 
-			this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
+			this.splitContainer1.Panel2.Controls.Add(this.tabControlMode);
 			this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
 			this.splitContainer1.Panel2MinSize = 225;
 			this.splitContainer1.Size = new System.Drawing.Size(598, 360);
@@ -581,6 +535,56 @@
 			this.mapControlCanvas.TabIndex = 0;
 			this.mapControlCanvas.Zoom = 1;
 			this.mapControlCanvas.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlCanvas_SelectedItem);
+			// 
+			// tabControlMode
+			// 
+			this.tabControlMode.Controls.Add(this.tabPagePutParts);
+			this.tabControlMode.Controls.Add(this.tabPageCollision);
+			this.tabControlMode.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControlMode.Location = new System.Drawing.Point(0, 110);
+			this.tabControlMode.Name = "tabControlMode";
+			this.tabControlMode.SelectedIndex = 0;
+			this.tabControlMode.Size = new System.Drawing.Size(263, 250);
+			this.tabControlMode.TabIndex = 2;
+			this.tabControlMode.SelectedIndexChanged += new System.EventHandler(this.tabControlMode_SelectedIndexChanged);
+			// 
+			// tabPagePutParts
+			// 
+			this.tabPagePutParts.Controls.Add(this.checkBoxPutFill);
+			this.tabPagePutParts.Controls.Add(this.comboBoxZoomParts);
+			this.tabPagePutParts.Controls.Add(this.mapControlParts);
+			this.tabPagePutParts.Controls.Add(this.buttonPutClear);
+			this.tabPagePutParts.Controls.Add(this.pictureBoxSelectedParts);
+			this.tabPagePutParts.Location = new System.Drawing.Point(4, 22);
+			this.tabPagePutParts.Name = "tabPagePutParts";
+			this.tabPagePutParts.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPagePutParts.Size = new System.Drawing.Size(255, 224);
+			this.tabPagePutParts.TabIndex = 0;
+			this.tabPagePutParts.Text = "パーツを配置";
+			this.tabPagePutParts.UseVisualStyleBackColor = true;
+			// 
+			// tabPageCollision
+			// 
+			this.tabPageCollision.Controls.Add(this.buttonSetCollisionByPartKind);
+			this.tabPageCollision.Controls.Add(this.buttonReadCollision);
+			this.tabPageCollision.Location = new System.Drawing.Point(4, 22);
+			this.tabPageCollision.Name = "tabPageCollision";
+			this.tabPageCollision.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPageCollision.Size = new System.Drawing.Size(255, 224);
+			this.tabPageCollision.TabIndex = 1;
+			this.tabPageCollision.Text = "衝突判定の設定";
+			this.tabPageCollision.UseVisualStyleBackColor = true;
+			// 
+			// buttonSetCollisionByPartKind
+			// 
+			this.buttonSetCollisionByPartKind.Location = new System.Drawing.Point(6, 35);
+			this.buttonSetCollisionByPartKind.Name = "buttonSetCollisionByPartKind";
+			this.buttonSetCollisionByPartKind.Size = new System.Drawing.Size(125, 23);
+			this.buttonSetCollisionByPartKind.TabIndex = 7;
+			this.buttonSetCollisionByPartKind.Text = "パーツ別に設定";
+			this.toolTip1.SetToolTip(this.buttonSetCollisionByPartKind, "マップパーツの種類毎に衝突判定を設定");
+			this.buttonSetCollisionByPartKind.UseVisualStyleBackColor = true;
+			this.buttonSetCollisionByPartKind.Click += new System.EventHandler(this.buttonSetCollisionByPartKind_Click);
 			// 
 			// buttonHelp
 			// 
@@ -654,8 +658,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMapRowCount)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsHeight)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsWidth)).EndInit();
-			this.groupBox2.ResumeLayout(false);
-			this.groupBox2.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBoxSelectedParts)).EndInit();
 			this.groupBox3.ResumeLayout(false);
 			this.splitContainer1.Panel1.ResumeLayout(false);
@@ -663,6 +665,10 @@
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
 			this.splitContainer1.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
+			this.tabControlMode.ResumeLayout(false);
+			this.tabPagePutParts.ResumeLayout(false);
+			this.tabPagePutParts.PerformLayout();
+			this.tabPageCollision.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -688,8 +694,7 @@
 		private System.Windows.Forms.ColorDialog colorDialog1;
 		private System.Windows.Forms.Button buttonChangeBackground;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox3;
 		private System.Windows.Forms.PictureBox pictureBoxSelectedParts;
 		private System.Windows.Forms.Button buttonPutClear;
@@ -701,14 +706,16 @@
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.Button buttonAddBackLayer;
 		private System.Windows.Forms.Button buttonHelp;
-		private System.Windows.Forms.RadioButton radioButtonModeCollision;
-		private System.Windows.Forms.RadioButton radioButtonModePutParts;
 		private System.Windows.Forms.Button buttonReadCollision;
 		private System.Windows.Forms.CheckBox checkBoxPutFill;
 		private System.Windows.Forms.Button buttonUnDo;
 		private System.Windows.Forms.Button buttonReDo;
 		private System.Windows.Forms.ToolTip toolTip1;
 		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.TabControl tabControlMode;
+		private System.Windows.Forms.TabPage tabPagePutParts;
+		private System.Windows.Forms.TabPage tabPageCollision;
+		private System.Windows.Forms.Button buttonSetCollisionByPartKind;
 	}
 }
 
