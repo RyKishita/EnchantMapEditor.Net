@@ -28,8 +28,8 @@ namespace EnchantMapEditor
 		public event Action<object, MapEventArgs> SelectedItem;
 
 		Image bufferImage = null;
-		int BlockWidth { get { return PartsWidth * Zoom + BorderWidth * 2; } }
-		int BlockHeight { get { return PartsHeight * Zoom + BorderWidth * 2; } }
+		int BlockWidth { get { return PartsWidth + BorderWidth * 2; } }
+		int BlockHeight { get { return PartsHeight + BorderWidth * 2; } }
 		List<List<int>> idMap = new List<List<int>>();
 
 		const int alpa = 100;
@@ -108,8 +108,8 @@ namespace EnchantMapEditor
 				return;
 			}
 
-			pictureBox1.Width = bufferImage.Width;
-			pictureBox1.Height = bufferImage.Height;
+			pictureBox1.Width = bufferImage.Width * Zoom;
+			pictureBox1.Height = bufferImage.Height * Zoom;
 
 			Image image = new Bitmap(bufferImage);
 			if (null != maskImage || null != dragImage)
@@ -208,13 +208,7 @@ namespace EnchantMapEditor
 						int id = row[columnIndex];
 						if (id < 0 || partsImages.Count <= id) continue;
 
-						var image = partsImages[id];
-						if (1 < Zoom)
-						{
-							image = image.GetThumbnailImage(image.Width * Zoom, image.Height * Zoom, null, IntPtr.Zero);
-						}
-
-						g.DrawImage(image,
+						g.DrawImage(partsImages[id],
 							columnIndex * BlockWidth + BorderWidth,
 							rowIndex * BlockHeight + BorderWidth);
 					}
@@ -231,8 +225,8 @@ namespace EnchantMapEditor
 				ClearDraging();
 				bDragStart = true;
 
-				int rowIndex = Math.Max(0, Math.Min(RowCount, e.Y / BlockHeight));
-				int columnIndex = Math.Max(0, Math.Min(ColumnCount, e.X / BlockWidth));
+				int rowIndex = Math.Max(0, Math.Min(RowCount - 1, e.Y / (BlockHeight * Zoom)));
+				int columnIndex = Math.Max(0, Math.Min(ColumnCount - 1, e.X / (BlockWidth * Zoom)));
 				dragStartRowIndex = rowIndex;
 				dragStartColumnIndex = columnIndex;
 				currentRowIndex = rowIndex;
@@ -246,8 +240,8 @@ namespace EnchantMapEditor
 
 		private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
 		{
-			int rowIndex = Math.Max(0, Math.Min(RowCount, e.Y / BlockHeight));
-			int columnIndex = Math.Max(0, Math.Min(ColumnCount, e.X / BlockWidth));
+			int rowIndex = Math.Max(0, Math.Min(RowCount - 1, e.Y / (BlockHeight * Zoom)));
+			int columnIndex = Math.Max(0, Math.Min(ColumnCount - 1, e.X / (BlockWidth * Zoom)));
 
 			if (bDragStart && AreaSelect)
 			{
