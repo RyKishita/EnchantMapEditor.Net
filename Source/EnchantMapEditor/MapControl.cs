@@ -26,6 +26,7 @@ namespace EnchantMapEditor
 		public bool AreaSelect { get; set; }
 
 		public event Action<object, MapEventArgs> SelectedItem;
+		public event Action<object, MapEventArgs> MoveCursor;
 
 		Image bufferImage = null;
 		int BlockWidth { get { return PartsWidth + BorderWidth * 2; } }
@@ -273,12 +274,15 @@ namespace EnchantMapEditor
 
 			MakeDragImage();
 			UpdateImage();
+
+			if (null != MoveCursor)
+			{
+				MoveCursor(this, MakeEventArgs());
+			}
 		}
 
-		private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+		MapEventArgs MakeEventArgs()
 		{
-			if (!bDragStart) return;
-
 			MapEventArgs data = new MapEventArgs();
 			if (AreaSelect)
 			{
@@ -294,6 +298,14 @@ namespace EnchantMapEditor
 				data.RowCount = 1;
 				data.ColumnCount = 1;
 			}
+			return data;
+		}
+
+		private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+		{
+			if (!bDragStart) return;
+
+			var data = MakeEventArgs();
 
 			ClearDraging();
 			SelectedItem(this, data);
@@ -357,6 +369,10 @@ namespace EnchantMapEditor
 		private void pictureBox1_MouseLeave(object sender, EventArgs e)
 		{
 			ClearDraging();
+			if (null != MoveCursor)
+			{
+				MoveCursor(this, MakeEventArgs());
+			}
 		}
 	}
 }

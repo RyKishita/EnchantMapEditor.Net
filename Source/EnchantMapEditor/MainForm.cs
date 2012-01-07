@@ -646,10 +646,12 @@ namespace EnchantMapEditor
 			if (SelectedPartsID == -1)
 			{
 				pictureBoxSelectedParts.Image = null;
+				labelPartsNo.Text = "空白";
 			}
 			else
 			{
 				pictureBoxSelectedParts.Image = partsImages[SelectedPartsID];
+				labelPartsNo.Text = string.Format("No{0}", SelectedPartsID);
 			}
 		}
 
@@ -918,6 +920,11 @@ namespace EnchantMapEditor
 					mapControlCanvas.UpdateImage();
 				}
 			}
+		}
+
+		private void mapControlCanvas_MoveCursor(object arg1, MapEventArgs arg2)
+		{
+			labelCursorPos.Text = arg2.ToString();
 		}
 	}
 }
