@@ -85,5 +85,21 @@ namespace EnchantMapEditor
 			}
 			SetState();
 		}
+
+		private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			bool enable = (0 < listView1.SelectedItems.Count);
+			button1.Enabled = enable;
+			button2.Enabled = enable;
+			button3.Enabled = enable;
+		}
+
+		private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+		{
+			bool enable = (0 < listView1.SelectedItems.Count);
+			onToolStripMenuItem.Enabled = enable;
+			offToolStripMenuItem.Enabled = enable;
+			invalidToolStripMenuItem.Enabled = enable;
+		}
 	}
 }
