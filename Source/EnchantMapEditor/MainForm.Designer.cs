@@ -63,14 +63,14 @@
 			this.labelCursorPos = new System.Windows.Forms.Label();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.mapControlCanvas = new EnchantMapEditor.MapControl();
 			this.tabControlMode = new System.Windows.Forms.TabControl();
 			this.tabPagePutParts = new System.Windows.Forms.TabPage();
 			this.labelPartsNo = new System.Windows.Forms.Label();
+			this.mapControlParts = new EnchantMapEditor.MapControl();
 			this.tabPageCollision = new System.Windows.Forms.TabPage();
 			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.checkedListBoxLayer = new System.Windows.Forms.CheckedListBox();
-			this.mapControlCanvas = new EnchantMapEditor.MapControl();
-			this.mapControlParts = new EnchantMapEditor.MapControl();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMapColumnCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownMapRowCount)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDownPartsHeight)).BeginInit();
@@ -534,6 +534,27 @@
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "マップ";
 			// 
+			// mapControlCanvas
+			// 
+			this.mapControlCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mapControlCanvas.AreaSelect = true;
+			this.mapControlCanvas.AutoScroll = true;
+			this.mapControlCanvas.BackColor = System.Drawing.Color.White;
+			this.mapControlCanvas.BorderWidth = 0;
+			this.mapControlCanvas.ColumnCount = 0;
+			this.mapControlCanvas.Location = new System.Drawing.Point(3, 18);
+			this.mapControlCanvas.Name = "mapControlCanvas";
+			this.mapControlCanvas.PartsHeight = 0;
+			this.mapControlCanvas.PartsWidth = 0;
+			this.mapControlCanvas.RowCount = 0;
+			this.mapControlCanvas.Size = new System.Drawing.Size(322, 309);
+			this.mapControlCanvas.TabIndex = 0;
+			this.mapControlCanvas.Zoom = 1;
+			this.mapControlCanvas.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlCanvas_SelectedItem);
+			this.mapControlCanvas.MoveCursor += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlCanvas_MoveCursor);
+			// 
 			// tabControlMode
 			// 
 			this.tabControlMode.Controls.Add(this.tabPagePutParts);
@@ -570,6 +591,26 @@
 			this.labelPartsNo.Size = new System.Drawing.Size(29, 12);
 			this.labelPartsNo.TabIndex = 1;
 			this.labelPartsNo.Text = "空白";
+			// 
+			// mapControlParts
+			// 
+			this.mapControlParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.mapControlParts.AreaSelect = false;
+			this.mapControlParts.AutoScroll = true;
+			this.mapControlParts.BackColor = System.Drawing.Color.White;
+			this.mapControlParts.BorderWidth = 1;
+			this.mapControlParts.ColumnCount = 0;
+			this.mapControlParts.Location = new System.Drawing.Point(6, 6);
+			this.mapControlParts.Name = "mapControlParts";
+			this.mapControlParts.PartsHeight = 0;
+			this.mapControlParts.PartsWidth = 0;
+			this.mapControlParts.RowCount = 0;
+			this.mapControlParts.Size = new System.Drawing.Size(157, 212);
+			this.mapControlParts.TabIndex = 0;
+			this.mapControlParts.Zoom = 2;
+			this.mapControlParts.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlParts_SelectedItem);
 			// 
 			// tabPageCollision
 			// 
@@ -611,44 +652,6 @@
 			this.checkedListBoxLayer.Size = new System.Drawing.Size(222, 58);
 			this.checkedListBoxLayer.TabIndex = 0;
 			this.checkedListBoxLayer.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxLayer_ItemCheck);
-			// 
-			// mapControlCanvas
-			// 
-			this.mapControlCanvas.AreaSelect = true;
-			this.mapControlCanvas.AutoScroll = true;
-			this.mapControlCanvas.BackColor = System.Drawing.Color.White;
-			this.mapControlCanvas.BorderWidth = 0;
-			this.mapControlCanvas.ColumnCount = 0;
-			this.mapControlCanvas.Location = new System.Drawing.Point(3, 18);
-			this.mapControlCanvas.Name = "mapControlCanvas";
-			this.mapControlCanvas.PartsHeight = 0;
-			this.mapControlCanvas.PartsWidth = 0;
-			this.mapControlCanvas.RowCount = 0;
-			this.mapControlCanvas.Size = new System.Drawing.Size(322, 309);
-			this.mapControlCanvas.TabIndex = 0;
-			this.mapControlCanvas.Zoom = 1;
-			this.mapControlCanvas.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlCanvas_SelectedItem);
-			this.mapControlCanvas.MoveCursor += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlCanvas_MoveCursor);
-			// 
-			// mapControlParts
-			// 
-			this.mapControlParts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.mapControlParts.AreaSelect = false;
-			this.mapControlParts.AutoScroll = true;
-			this.mapControlParts.BackColor = System.Drawing.Color.White;
-			this.mapControlParts.BorderWidth = 1;
-			this.mapControlParts.ColumnCount = 0;
-			this.mapControlParts.Location = new System.Drawing.Point(6, 6);
-			this.mapControlParts.Name = "mapControlParts";
-			this.mapControlParts.PartsHeight = 0;
-			this.mapControlParts.PartsWidth = 0;
-			this.mapControlParts.RowCount = 0;
-			this.mapControlParts.Size = new System.Drawing.Size(157, 212);
-			this.mapControlParts.TabIndex = 0;
-			this.mapControlParts.Zoom = 2;
-			this.mapControlParts.SelectedItem += new System.Action<object, EnchantMapEditor.MapEventArgs>(this.mapControlParts_SelectedItem);
 			// 
 			// MainForm
 			// 
