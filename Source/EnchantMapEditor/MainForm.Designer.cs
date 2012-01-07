@@ -585,6 +585,7 @@
 			// 
 			// labelPartsNo
 			// 
+			this.labelPartsNo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelPartsNo.AutoSize = true;
 			this.labelPartsNo.Location = new System.Drawing.Point(169, 6);
 			this.labelPartsNo.Name = "labelPartsNo";
